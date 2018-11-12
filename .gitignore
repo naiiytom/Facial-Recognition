@@ -1,4 +1,6 @@
-./.vscode
+*/.vscode/*
 .vscode/settings.json
 tools/__pycache__/*
-
+datasets/*
+models/*
+*/__pycache__/*
