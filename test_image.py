@@ -1,6 +1,6 @@
-from __future__ import absolute_import
+"""from __future__ import absolute_import
 from __future__ import division
-from __future__ import print_function
+from __future__ import print_function"""
 
 import os
 import pickle
@@ -13,7 +13,7 @@ import tensorflow as tf
 from scipy import misc
 from packages import facenet, detect_face
 
-img_path='./test/test2.jpg'
+img_path='./test/test5.jpg'
 modeldir = './models/20180408-102900'
 classifier_filename = './class/classifier.pkl'
 npy='./packages'

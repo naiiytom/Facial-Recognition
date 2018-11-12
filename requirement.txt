@@ -1,0 +1,5 @@
+tensorflow-gpu == 1.17
+Pillow
+numpy
+scipy
+opencv == 3.4.3
