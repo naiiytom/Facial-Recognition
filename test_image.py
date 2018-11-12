@@ -13,11 +13,11 @@ import tensorflow as tf
 from scipy import misc
 from packages import facenet, detect_face
 
-img_path='2.jpg'
+img_path='./test/test2.jpg'
 modeldir = './models/20180408-102900'
 classifier_filename = './class/classifier.pkl'
 npy='./packages'
-train_img="./BNK"
+train_img="./datasets"
 
 with tf.Graph().as_default():
     gpu_options = tf.GPUOptions(per_process_gpu_memory_fraction=0.6)

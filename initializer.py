@@ -1,7 +1,7 @@
 from packages.preprocess import preprocesses
 
-input_datadir = './BNK'
-output_datadir = './pre_img'
+input_datadir = './datasets'
+output_datadir = './preprocessed_img'
 
 obj=preprocesses(input_datadir,output_datadir)
 nrof_images_total, nrof_successfully_aligned=obj.collect_data()

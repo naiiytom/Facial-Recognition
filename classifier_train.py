@@ -6,7 +6,7 @@ import sys
 
 from packages.classifier import training
 
-datadir = './pre_img'
+datadir = './preprocessed_img'
 modeldir = './models/20180408-102900'
 classifier_filename = './class/classifier.pkl'
 print ("Training Start")
