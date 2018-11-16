@@ -1,6 +1,3 @@
-"""from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function"""
 
 import os
 import pickle
@@ -13,7 +10,7 @@ import tensorflow as tf
 from scipy import misc
 from packages import facenet, detect_face
 
-img_path='./test/test5.jpg'
+img_path='./test/test6.jpg'
 modeldir = './models/20180408-102900'
 classifier_filename = './class/classifier.pkl'
 npy='./packages'
@@ -111,7 +108,7 @@ with tf.Graph().as_default():
                     # print(best_class_indices)
                     best_class_probabilities = predictions[np.arange(len(best_class_indices)), best_class_indices]
                     print(best_class_probabilities)
-                    cv2.rectangle(frame, (bb[i][0], bb[i][1]), (bb[i][2], bb[i][3]), (0, 255, 0), 2)    #boxing face
+                    cv2.rectangle(frame, (bb[i][0], bb[i][1]), (bb[i][2], bb[i][3]), (0, 0, 255), 2)    #boxing face
 
                     #plot result idx under box
                     text_x = bb[i][0]
@@ -123,7 +120,7 @@ with tf.Graph().as_default():
                         if HumanNames[best_class_indices[0]] == H_i:
                             result_names = HumanNames[best_class_indices[0]]
                             cv2.putText(frame, result_names, (text_x, text_y), cv2.FONT_HERSHEY_COMPLEX_SMALL,
-                                        1, (0, 0, 255), thickness=1, lineType=2)
+                                        1, (255, 0, 0), thickness=1, lineType=2)
 
 
             else:
