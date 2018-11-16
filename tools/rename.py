@@ -1,7 +1,7 @@
 
 import os
 
-datadir = os.path.expanduser('../datasets/BNK')
+datadir = os.path.expanduser('../datasets')
 subdir = os.listdir(datadir)
 subdir.sort()
 for i in range(len(subdir)):
@@ -11,8 +11,5 @@ for i in range(len(subdir)):
         images = os.listdir(facedir)
         images.sort()
         for j in range(len(images)):
-            print('rename: ' + images[j] + ' to ===> ' + facedir.split('\\')[1] + '_%03d.jpg' % j)
-            os.rename(os.path.join(facedir, images[j]), os.path.join(facedir, (facedir.split('\\')[1] + '_%03d.jpg' % j)))
-
-
-#print(subdir)
+            print('rename: ' + images[j] + ' to ===> ' + facedir.split('\\')[1] + '_%04d.jpg' % j)
+            os.rename(os.path.join(facedir, images[j]), os.path.join(facedir, (facedir.split('\\')[1] + '_%04d.jpg' % j)))

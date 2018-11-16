@@ -1,6 +1,3 @@
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
 
 import math
 import os
@@ -53,7 +50,8 @@ class training:
                 print('Training Started')
                 model = SVC(kernel='linear', probability=True)
                 model.fit(emb_array, label)
-
+                print('Model Accuracy:', model.score(emb_array, label))
+                
                 class_names = [cls.name.replace('_', ' ') for cls in img_data]
 
                 # Saving model

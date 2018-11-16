@@ -122,5 +122,5 @@ def recognizer(images_path,
 
 
 if __name__ == '__main__':
-	images = ['./test/test.jpg', './test/test1.jpg', './test/test2.jpg', './test/test3.jpg']
+	images = ['./test/test.jpg', './test/test1.jpg', './test/test2.jpg', './test/test3.jpg', './test/test4.jpg', './test/test5.jpg', './test/test6.jpg']
 	recognizer(images)
