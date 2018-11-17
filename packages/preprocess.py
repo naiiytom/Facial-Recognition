@@ -1,6 +1,3 @@
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
 
 import os
 
@@ -69,7 +66,7 @@ class preprocesses:
                             bounding_boxes, _ = detect_face.detect_face(img, minsize, pnet, rnet, onet, threshold,
                                                                         factor)
                             nrof_faces = bounding_boxes.shape[0]
-                            print('No of Detected Face: %d' % nrof_faces)
+                            print('Number of Detected Face: %d' % nrof_faces)
                             if nrof_faces > 0:
                                 det = bounding_boxes[:, 0:4]
                                 img_size = np.asarray(img.shape)[0:2]
