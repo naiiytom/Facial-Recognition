@@ -50,6 +50,8 @@ def recognizer(video_path,
 			print('Facial Recognition Starting...')
 			#win = dlib.image_window()
 			cap = cv2.VideoCapture(video_path)
+			fourcc = cv2.VideoWriter_fourcc(*'XVID')
+			out = cv2.VideoWriter('output.avi',fourcc, 20.0, (640,480))
 			while True:
 				_, frame = cap.read()
 				frame = cv2.resize(frame, (0, 0), fx=0.5, fy=0.5)
@@ -100,26 +102,33 @@ def recognizer(video_path,
 							print(predictions)
 							best_class_indices = np.argmax(predictions, axis=1)
 							best_class_probabilities = predictions[np.arange(len(best_class_indices)), best_class_indices]
-							print(best_class_probabilities)
-							cv2.rectangle(frame, (bb[i][0], bb[i][1]), (bb[i][2], bb[i][3]), (0, 0, 255), 1)
+							#print(best_class_probabilities)
+							
+							print('Accuracy: ', best_class_probabilities)
+							
+							if best_class_probabilities > 0.15:
+								cv2.rectangle(frame, (bb[i][0], bb[i][1]), (bb[i][2], bb[i][3]), (0, 0, 255), 1)
 
-							text_x = bb[i][0] + 10
-							text_y = bb[i][1] - 10
-							print('Result Indices: ', best_class_indices[0])
-							for H_i in HumanNames:
-								if HumanNames[best_class_indices[0]] == H_i:
-									predict_names = HumanNames[best_class_indices[0]]
-									cv2.putText(frame, predict_names, (text_x, text_y), cv2.FONT_HERSHEY_COMPLEX_SMALL, 1, (255, 0, 0), thickness=1, lineType=2)
+								text_x = bb[i][0] + 10
+								text_y = bb[i][1] - 10
+								print('Result Indices: ', best_class_indices[0])
+								for H_i in HumanNames:
+									if HumanNames[best_class_indices[0]] == H_i:
+										predict_names = HumanNames[best_class_indices[0]]
+										cv2.putText(frame, predict_names, (text_x, text_y), cv2.FONT_HERSHEY_COMPLEX_SMALL, 1, (255, 0, 0), thickness=1, lineType=2)
 					else:
 						print('Unable to find face')
-					cv2.imshow('%d Face(s) detected' % nrof_faces, frame)
-					if cv2.waitKey(0) & 0xFF == ord('q'):
-						print('Ending...')
-						break
+				out.write(frame)
+				cv2.imshow('Facial Recognition', frame)
+
+				if cv2.waitKey(1) & 0xFF == ord('q'):
+					print('Ending...')
+					break
 						#sys.exit('Ending...')
+			cap.release()
 			cv2.destroyAllWindows()
 
 
 if __name__ == '__main__':
-	video = 'test.mp4'
+	video = './vidtest/cleo.mp4'
 	recognizer(video)
