@@ -7,4 +7,4 @@ models/*
 ./preprocessed_img/*
 preprocessed_img/*/*.png
 class/classifier.pkl
-./vidtest/*.mp4
+./vidtest
