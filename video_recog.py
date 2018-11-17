@@ -11,7 +11,7 @@ from scipy import misc
 from packages import facenet, detect_face
 
 
-def recognizer(images_path, 
+def recognizer(video_path, 
 			pretrain_model='./models/20180408-102900', 
 			classifier='./class/classifier.pkl', 
 			npy_dir='./packages', 
@@ -49,8 +49,9 @@ def recognizer(images_path,
 			c = 0
 			print('Facial Recognition Starting...')
 			#win = dlib.image_window()
-			for img in images_path:
-				frame = cv2.imread(img, 1)
+			cap = cv2.VideoCapture(video_path)
+			while True:
+				_, frame = cap.read()
 				frame = cv2.resize(frame, (0, 0), fx=0.5, fy=0.5)
 
 				#frame = dlib.load_rgb_image(img)
@@ -112,9 +113,7 @@ def recognizer(images_path,
 					else:
 						print('Unable to find face')
 					cv2.imshow('%d Face(s) detected' % nrof_faces, frame)
-					if cv2.waitKey(0) & 0xFF == ord('\r'):
-						print('Processing next image...')
-					elif cv2.waitKey(0) & 0xFF == ord('q'):
+					if cv2.waitKey(0) & 0xFF == ord('q'):
 						print('Ending...')
 						break
 						#sys.exit('Ending...')
@@ -122,5 +121,5 @@ def recognizer(images_path,
 
 
 if __name__ == '__main__':
-	images = ['./test/test.jpg', './test/test1.jpg', './test/test2.jpg', './test/test3.jpg', './test/test4.jpg', './test/test5.jpg', './test/test6.jpg']
-	recognizer(images)
+	video = 'test.mp4'
+	recognizer(video)

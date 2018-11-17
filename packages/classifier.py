@@ -18,7 +18,8 @@ class training:
 
     def main_train(self):
         with tf.Graph().as_default():
-            with tf.Session() as sess:
+            gpu_options = tf.GPUOptions(allow_growth=True)
+            with tf.Session(config=tf.ConfigProto(gpu_options=gpu_options, log_device_placement=False)).as_default() as sess:
                 img_data = facenet.get_dataset(self.datadir)
                 path, label = facenet.get_image_paths_and_labels(img_data)
                 print('Classes: %d' % len(img_data))
@@ -31,7 +32,7 @@ class training:
                 embedding_size = embeddings.get_shape()[1]
 
                 print('Extracting features of images for model')
-                batch_size = 10000
+                batch_size = 125 #batch size 125 for GTX950M and 1000 for GTX1070
                 image_size = 160
                 nrof_images = len(path)
                 nrof_batches_per_epoch = int(math.ceil(1.0 * nrof_images / batch_size))
@@ -51,7 +52,6 @@ class training:
                 model = SVC(kernel='linear', probability=True)
                 model.fit(emb_array, label)
                 print('Model Accuracy:', model.score(emb_array, label))
-                
                 class_names = [cls.name.replace('_', ' ') for cls in img_data]
 
                 # Saving model
