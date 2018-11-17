@@ -6,3 +6,4 @@ models/*
 */__pycache__/*
 ./preprocessed_img/*
 preprocessed_img/*/*.png
+class/classifier.pkl
