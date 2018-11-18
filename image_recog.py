@@ -100,7 +100,7 @@ def recognizer(images_path,
 							best_class_indices = np.argmax(predictions, axis=1)
 							best_class_probabilities = predictions[np.arange(len(best_class_indices)), best_class_indices]
 							print(best_class_probabilities)
-							cv2.rectangle(frame, (bb[i][0], bb[i][1]), (bb[i][2], bb[i][3]), (255, 255, 0), 1)
+							cv2.rectangle(frame, (bb[i][0], bb[i][1]), (bb[i][2], bb[i][3]), (0, 255, 255), 1)
 
 							text_x = bb[i][0] + 10
 							text_y = bb[i][1] - 10
@@ -108,7 +108,7 @@ def recognizer(images_path,
 							for H_i in HumanNames:
 								if HumanNames[best_class_indices[0]] == H_i:
 									predict_names = HumanNames[best_class_indices[0]]
-									cv2.putText(frame, predict_names, (text_x, text_y), cv2.FONT_HERSHEY_COMPLEX_SMALL, 1, (255, 0, 0), thickness=1, lineType=2)
+									cv2.putText(frame, predict_names, (text_x, text_y), cv2.FONT_HERSHEY_COMPLEX_SMALL, 1, (0, 0, 255), thickness=1, lineType=2)
 					else:
 						print('Unable to find face')
 					cv2.imshow('%d Face(s) detected' % nrof_faces, frame)
