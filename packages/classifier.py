@@ -11,10 +11,11 @@ from packages import facenet
 
 
 class training:
-    def __init__(self, datadir, modeldir,classifier_filename):
+    def __init__(self, datadir, modeldir,classifier_filename, score_path):
         self.datadir = datadir
         self.modeldir = modeldir
         self.classifier_filename = classifier_filename
+        self.score_path = score_path
 
     def main_train(self):
         with tf.Graph().as_default():
@@ -46,12 +47,16 @@ class training:
                     emb_array[start_index:end_index, :] = sess.run(embeddings, feed_dict=feed_dict)
 
                 classifier_file_name = os.path.expanduser(self.classifier_filename)
+                score_path = os.path.expanduser(self.score_path)
 
                 # Training Started
                 print('Training Started')
                 model = SVC(kernel='linear', probability=True)
                 model.fit(emb_array, label)
-                print('Model Accuracy:', model.score(emb_array, label))
+                score = model.score(emb_array, label)
+                print('Model Accuracy:', score)
+                with open(score_path, 'w') as out_score:
+                    out_score.write('Accuracy: {}'.format(score))
                 class_names = [cls.name.replace('_', ' ') for cls in img_data]
 
                 # Saving model
