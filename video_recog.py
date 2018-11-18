@@ -50,10 +50,8 @@ def recognizer(video_path,
 			print('Facial Recognition Starting...')
 			#win = dlib.image_window()
 			cap = cv2.VideoCapture(video_path)
-			fourcc = cv2.VideoWriter_fourcc(*'XVID')
-			out = cv2.VideoWriter('output.avi',fourcc, 20.0, (640,480))
 			while True:
-				_, frame = cap.read()
+				ret, frame = cap.read()
 				frame = cv2.resize(frame, (0, 0), fx=0.5, fy=0.5)
 
 				#frame = dlib.load_rgb_image(img)
@@ -118,8 +116,8 @@ def recognizer(video_path,
 										cv2.putText(frame, predict_names, (text_x, text_y), cv2.FONT_HERSHEY_COMPLEX_SMALL, 1, (255, 0, 0), thickness=1, lineType=2)
 					else:
 						print('Unable to find face')
-				out.write(frame)
-				cv2.imshow('Facial Recognition', frame)
+				if ret:
+					cv2.imshow('Facial Recognition', frame)
 
 				if cv2.waitKey(1) & 0xFF == ord('q'):
 					print('Ending...')
