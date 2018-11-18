@@ -1,5 +1,7 @@
-tensorflow-gpu == 1.17
+tensorflow-gpu
 Pillow
 numpy
 scipy
-opencv == 3.4.3
+opencv
+pickle
+cuda == 9.2

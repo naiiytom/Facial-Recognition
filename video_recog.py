@@ -104,10 +104,10 @@ def recognizer(video_path,
 							
 							print('Accuracy: ', best_class_probabilities)
 							
-							if best_class_probabilities > 0.15:
-								cv2.rectangle(frame, (bb[i][0], bb[i][1]), (bb[i][2], bb[i][3]), (0, 0, 255), 1)
+							if best_class_probabilities > 0.3:
+								cv2.rectangle(frame, (bb[i][0], bb[i][1]), (bb[i][2], bb[i][3]), (255, 255, 0), 1)
 
-								text_x = bb[i][0] + 10
+								text_x = bb[i][0]
 								text_y = bb[i][1] - 10
 								print('Result Indices: ', best_class_indices[0])
 								for H_i in HumanNames:
@@ -128,5 +128,5 @@ def recognizer(video_path,
 
 
 if __name__ == '__main__':
-	video = './vidtest/cleo.mp4'
+	video = './vidtest/nande.MP4'
 	recognizer(video)

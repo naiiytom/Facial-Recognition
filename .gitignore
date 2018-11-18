@@ -5,3 +5,6 @@ datasets/*
 models/*
 */__pycache__/*
 ./vidtest
+vidtest/fish.MKV
+vidtest/nande.MP4
+./preprocessed_img/*.png
