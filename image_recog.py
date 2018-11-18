@@ -27,7 +27,7 @@ def recognizer(images_path,
 						'factor':0.709,
 						'margin':44,
 						'frame_interval':3,
-						'batch_size':1000,
+						'batch_size':125,
 						'image_size':182,
 						'input_image_size':160 }
 
@@ -111,7 +111,7 @@ def recognizer(images_path,
 									cv2.putText(frame, predict_names, (text_x, text_y), cv2.FONT_HERSHEY_COMPLEX_SMALL, 1, (0, 0, 255), thickness=1, lineType=2)
 					else:
 						print('Unable to find face')
-					cv2.imshow('%d Face(s) detected' % nrof_faces, frame)
+					cv2.imshow('Face(s) detected', frame)
 					if cv2.waitKey(0) & 0xFF == ord('\r'):
 						print('Processing next image...')
 					elif cv2.waitKey(0) & 0xFF == ord('q'):

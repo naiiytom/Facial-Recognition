@@ -27,7 +27,7 @@ def recognizer(video_path,
 						'factor':0.709,
 						'margin':44,
 						'frame_interval':3,
-						'batch_size':1000,
+						'batch_size':125,
 						'image_size':182,
 						'input_image_size':160 }
 
