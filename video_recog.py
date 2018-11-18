@@ -105,7 +105,7 @@ def recognizer(video_path,
 							print('Accuracy: ', best_class_probabilities)
 							
 							if best_class_probabilities > 0.3:
-								cv2.rectangle(frame, (bb[i][0], bb[i][1]), (bb[i][2], bb[i][3]), (255, 255, 0), 1)
+								cv2.rectangle(frame, (bb[i][0], bb[i][1]), (bb[i][2], bb[i][3]), (0, 255, 255), 1)
 
 								text_x = bb[i][0]
 								text_y = bb[i][1] - 10
@@ -113,7 +113,7 @@ def recognizer(video_path,
 								for H_i in HumanNames:
 									if HumanNames[best_class_indices[0]] == H_i:
 										predict_names = HumanNames[best_class_indices[0]]
-										cv2.putText(frame, predict_names, (text_x, text_y), cv2.FONT_HERSHEY_COMPLEX_SMALL, 1, (255, 0, 0), thickness=1, lineType=2)
+										cv2.putText(frame, predict_names, (text_x, text_y), cv2.FONT_HERSHEY_COMPLEX_SMALL, 1, (0, 0, 255), thickness=1, lineType=2)
 					else:
 						print('Unable to find face')
 				if ret:
@@ -128,5 +128,5 @@ def recognizer(video_path,
 
 
 if __name__ == '__main__':
-	video = './vidtest/nande.MP4'
+	video = './vidtest/cleo.MP4'
 	recognizer(video)
