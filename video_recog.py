@@ -128,5 +128,5 @@ def recognizer(video_path,
 
 
 if __name__ == '__main__':
-	video = './vidtest/cleo.MP4'
+	video = './vidtest/nande.MP4'
 	recognizer(video)
