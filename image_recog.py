@@ -101,8 +101,9 @@ def recognizer(images_path,
 							best_class_probabilities = predictions[np.arange(len(best_class_indices)), best_class_indices]	
 							print('Accuracy: ', best_class_probabilities)
 
-							if best_class_probabilities > 0.15:
-								cv2.rectangle(frame, (bb[i][0], bb[i][1]), (bb[i][2], bb[i][3]), (0, 255, 255), 1)
+							cv2.rectangle(frame, (bb[i][0], bb[i][1]), (bb[i][2], bb[i][3]), (0, 255, 255), 1)
+
+							if best_class_probabilities > 0.2:
 
 								text_x = bb[i][0]
 								text_y = bb[i][1] - 10
@@ -111,6 +112,11 @@ def recognizer(images_path,
 									if HumanNames[best_class_indices[0]] == H_i:
 										predict_names = HumanNames[best_class_indices[0]]
 										cv2.putText(frame, predict_names, (text_x, text_y), cv2.FONT_HERSHEY_COMPLEX_SMALL, 1, (0, 0, 255), thickness=1, lineType=2)
+							else:
+								text_x = bb[i][0]
+								text_y = bb[i][1] - 10
+								print('Result Indices: ', best_class_indices[0])
+								cv2.putText(frame, 'Unknown', (text_x, text_y), cv2.FONT_HERSHEY_COMPLEX_SMALL, 1, (0, 0, 255), thickness=1, lineType=2)
 					else:
 						print('Unable to find face')
 					cv2.imshow('Face(s) detected', frame)
@@ -126,6 +132,6 @@ def recognizer(images_path,
 if __name__ == '__main__':
 	test_img_path='./test'
 	images = [os.path.join(test_img_path, img) for img in os.listdir(test_img_path)]
+	#images = ['noey.jpg']
 	print(images)
-	#images = ['./test/Izurina.jpg', './test/test.jpg', './test/test5.jpg']
 	recognizer(images)

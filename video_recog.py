@@ -3,6 +3,7 @@ import os
 import sys
 import time
 
+#import dlib
 import cv2
 import numpy as np
 import pickle
@@ -52,7 +53,7 @@ def recognizer(video_path,
 			cap = cv2.VideoCapture(video_path)
 			while True:
 				ret, frame = cap.read()
-				frame = cv2.resize(frame, (0, 0), fx=0.5, fy=0.5)
+				frame = cv2.resize(frame, (0, 0), fx=0.7, fy=0.7)
 
 				#frame = dlib.load_rgb_image(img)
 				#frame = dlib.resize_image(img, 0.5, 0.5)
@@ -103,9 +104,8 @@ def recognizer(video_path,
 							#print(best_class_probabilities)
 							
 							print('Accuracy: ', best_class_probabilities)
-							
+							cv2.rectangle(frame, (bb[i][0], bb[i][1]), (bb[i][2], bb[i][3]), (0, 255, 255), 1)
 							if best_class_probabilities > 0.3:
-								cv2.rectangle(frame, (bb[i][0], bb[i][1]), (bb[i][2], bb[i][3]), (0, 255, 255), 1)
 
 								text_x = bb[i][0]
 								text_y = bb[i][1] - 10
@@ -114,6 +114,12 @@ def recognizer(video_path,
 									if HumanNames[best_class_indices[0]] == H_i:
 										predict_names = HumanNames[best_class_indices[0]]
 										cv2.putText(frame, predict_names, (text_x, text_y), cv2.FONT_HERSHEY_COMPLEX_SMALL, 1, (0, 0, 255), thickness=1, lineType=2)
+							else:
+								text_x = bb[i][0]
+								text_y = bb[i][1] - 10
+								print('Result Indices: ', best_class_indices[0])
+								cv2.putText(frame, 'Unknown', (text_x, text_y), cv2.FONT_HERSHEY_COMPLEX_SMALL, 1, (0, 0, 255), thickness=1, lineType=2)
+
 					else:
 						print('Unable to find face')
 				if ret:
