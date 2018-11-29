@@ -6,6 +6,7 @@ import pickle
 import numpy as np
 import tensorflow as tf
 from sklearn.svm import SVC
+from sklearn.model_selection import GridSearchCV
 
 from packages import facenet
 
@@ -51,12 +52,19 @@ class training:
 
                 # Training Started
                 print('Training Started')
-                model = SVC(kernel='linear', probability=True)
+                #param_grid = {'C':[1,10,100,1000],'gamma':[1,0.1,0.001,0.0001], 'kernel':['linear','rbf']}
+                #grid = GridSearchCV(SVC(),param_grid,refit = True, verbose=2)
+                #model = SVC(kernel='linear', probability=True)
+                
+                #grid.fit(emb_array, label)
+                #best_param = grid.best_params_
+                #print(best_param)
+                model = SVC(C=10, gamma=1, kernel='rbf', probability=True)
                 model.fit(emb_array, label)
                 score = model.score(emb_array, label)
                 print('Model Accuracy:', score)
                 with open(score_path, 'w') as out_score:
-                    out_score.write('Accuracy: {}'.format(score))
+                    out_score.write('Accuracy: {}\n '.format(score))
                 class_names = [cls.name.replace('_', ' ') for cls in img_data]
 
                 # Saving model

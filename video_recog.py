@@ -105,7 +105,7 @@ def recognizer(video_path,
 							
 							print('Accuracy: ', best_class_probabilities)
 							cv2.rectangle(frame, (bb[i][0], bb[i][1]), (bb[i][2], bb[i][3]), (0, 255, 255), 1)
-							if best_class_probabilities > 0.3:
+							if best_class_probabilities > 0.2:
 
 								text_x = bb[i][0]
 								text_y = bb[i][1] - 10
