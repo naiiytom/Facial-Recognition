@@ -33,7 +33,7 @@ class training:
                 embedding_size = embeddings.get_shape()[1]
 
                 print('Extracting features of images for model')
-                batch_size = 125 #batch size 125 for GTX950M and 1000 for GTX1070
+                batch_size = 100 #batch size 100
                 image_size = 160
                 nrof_images = len(path)
                 nrof_batches_per_epoch = int(math.ceil(1.0 * nrof_images / batch_size))
