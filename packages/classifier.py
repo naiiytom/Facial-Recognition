@@ -52,21 +52,24 @@ class training:
 
                 # Training Started
                 print('Training Started')
-                #param_grid = {'C':[1,10,100,1000],'gamma':[1,0.1,0.001,0.0001], 'kernel':['linear','rbf']}
-                #grid = GridSearchCV(SVC(),param_grid,refit = True, verbose=2)
-                #model = SVC(kernel='linear', probability=True)
-                
-                #grid.fit(emb_array, label)
-                #best_param = grid.best_params_
-                #print(best_param)
-                model = SVC(C=10, gamma=1, kernel='rbf', probability=True)
+                #parameters tuning
+                param_grid = {'C':[1,10,100,1000],'gamma':[1,0.1,0.001,0.0001], 'kernel':['linear','rbf']}
+                grid = GridSearchCV(SVC(), param_grid, refit = True, verbose=2)             
+                grid.fit(emb_array, label)
+                best_param = grid.best_params_
+                print('Best Parameters: ', best_param)
+
+
+                print('Train Using Best Parameters...')
+                model = SVC(C=best_param['C'], gamma=best_param['gamma'], kernel=best_param['kernel'], probability=True)
                 model.fit(emb_array, label)
                 score = model.score(emb_array, label)
                 print('Model Accuracy:', score)
+                #Saving acc
                 with open(score_path, 'w') as out_score:
                     out_score.write('Accuracy: {}\n '.format(score))
+            
                 class_names = [cls.name.replace('_', ' ') for cls in img_data]
-
                 # Saving model
                 with open(classifier_file_name, 'wb') as outfile:
                     pickle.dump((model, class_names), outfile)
