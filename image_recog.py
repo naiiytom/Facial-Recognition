@@ -103,7 +103,7 @@ def recognizer(images_path,
 
 							cv2.rectangle(frame, (bb[i][0], bb[i][1]), (bb[i][2], bb[i][3]), (0, 255, 255), 1)
 
-							if best_class_probabilities > 0.2:
+							if best_class_probabilities > 0.15:
 
 								text_x = bb[i][0]
 								text_y = bb[i][1] - 10
